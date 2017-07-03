@@ -32,3 +32,22 @@ sleep %>%
   group_by(Subject) %>%
   summarise(mean(Reaction))
 ```
+
+Mean-center reaction times and plot on a single axis
+
+```{r}
+sleep %>%
+  group_by(Subject) %>%
+  mutate(mean_centered_reaction = Reaction - mean(Reaction)) %>%
+  ggplot(aes(x = Days, y = mean_centered_reaction,
+      colour = factor(Subject))) + 
+    geom_smooth(show.legend = FALSE, se = FALSE) +
+    scale_x_continuous(breaks = seq(0, 8, by = 2))
+```
+
+
+
+
+
+
+
